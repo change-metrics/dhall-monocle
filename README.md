@@ -10,9 +10,5 @@ cd example
 dhall-to-yaml <<< ./config.dhall
 ```
 
-## Todo
-
-Manage secret as { test = env:SECRET as Text ? "no-secret" }
-
 [dhall-lang]: https://dhall-lang.org
 [monocle]: https://github.com/change-metrics/monocle
