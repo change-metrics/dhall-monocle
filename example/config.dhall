@@ -10,6 +10,12 @@ in  { tenants =
             , updated_since = "2021-01-01"
             }
           ]
+        , projects = Some
+          [ Monocle.Project::{
+            , name = "awesome-project"
+            , repository_regex = Some ".*compute.*"
+            }
+          ]
         , crawler = Monocle.Crawler::{
           , loop_delay = 600
           , github_orgs = Some
