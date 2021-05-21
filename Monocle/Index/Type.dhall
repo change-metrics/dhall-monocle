@@ -1,5 +1,6 @@
 { index : Text
 , users : Optional (List Text)
-, task_tracker_crawlers : Optional (List ../TaskTrackerCrawler/Type.dhall)
+, task_crawlers : Optional (List ../TaskCrawler/Type.dhall)
 , crawler : ../Crawler/Type.dhall
+, projects : Optional (List ../Project/Type.dhall)
 }
