@@ -4,4 +4,5 @@
 , Crawler = ./Crawler/package.dhall
 , Project = ./Project/package.dhall
 , Index = ./Index/package.dhall
+, Ident = ./Ident/package.dhall
 }
