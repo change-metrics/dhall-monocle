@@ -1,13 +1,21 @@
 let Monocle = ../package.dhall
 
 in  { tenants =
-      [ Monocle.Index::{
+      [ Monocle.Tenant::{
         , index = "demo-index"
-        , task_crawlers = Some
-          [ Monocle.TaskCrawler::{
-            , name = "bob-crawler"
-            , api_key = "123"
-            , updated_since = "2021-01-01"
+        , crawlers_api_key = Some "super-secret"
+        , crawlers = Some
+          [ Monocle.Lentille::{
+            , name = "my-gitlab"
+            , update_since = "2021-01-01"
+            , provider =
+                Monocle.Provider.Gitlab
+                  Monocle.Gitlab::{
+                  , gitlab_url = "https://gitlab.example.com"
+                  , gitlab_api_key = "gitlab-api-key"
+                  , gitlab_repositories = Some
+                    [ "my-org/project", "my-other-org/other-project" ]
+                  }
             }
           ]
         , projects = Some
@@ -16,23 +24,6 @@ in  { tenants =
             , repository_regex = Some ".*compute.*"
             }
           ]
-        , crawler = Monocle.Crawler::{
-          , loop_delay = 600
-          , github_orgs = Some
-            [ Monocle.GitHub::{
-              , name = "ansible"
-              , base_url = "https://github.com"
-              , updated_since = "2000-01-01"
-              }
-            ]
-          , gerrit_repositories = Some
-            [ Monocle.Gerrit::{
-              , name = "^openstack/.*\$"
-              , base_url = "https://review.opendev.org"
-              , updated_since = "2000-01-01"
-              }
-            ]
-          }
         }
       ]
     }
