@@ -12,3 +12,4 @@ jobs:
       - uses: dhall-lang/setup-dhall@v4
       - run: dhall hash --file ./package.dhall
       - run: dhall-to-yaml --file ./example/config.dhall
+      - run: dhall-to-yaml --file ./example/demo-node.dhall
