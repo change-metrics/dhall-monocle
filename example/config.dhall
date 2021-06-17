@@ -1,6 +1,7 @@
 let Monocle = ../package.dhall
 
-in  { tenants =
+in  Monocle.Config::{
+    , tenants =
       [ Monocle.Tenant::{
         , index = "demo-index"
         , crawlers_api_key = Some "super-secret"
