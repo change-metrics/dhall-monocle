@@ -22,4 +22,5 @@ in      legacy
         , Lentille = ./Lentille/package.dhall
         , Tenant = ./Tenant/package.dhall
         , Ident = ./Ident/package.dhall
+        , Config = { Type = ./Config.dhall, default = {=} }
         }
