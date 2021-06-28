@@ -70,7 +70,7 @@ let --| The ansible index configuration
 
       in  Monocle.Index::{
           , index = "ansible"
-          , crawler = Monocle.Crawler::{
+          , crawler = Some Monocle.Crawler::{
             , loop_delay = 300
             , github_orgs = Some
                 (   Prelude.List.map
@@ -99,7 +99,7 @@ let --| Create a github crawler configuration for monocle
       \(name : Text) ->
         Monocle.Index::{
         , index = name
-        , crawler = Monocle.Crawler::{
+        , crawler = Some Monocle.Crawler::{
           , loop_delay = 300
           , github_orgs = Some [ mkSimpleGHOrg (None Text) name ]
           }
