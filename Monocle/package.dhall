@@ -20,6 +20,7 @@ in      legacy
         , Provider = ./Provider/package.dhall
         , Project = ./Project/package.dhall
         , Lentille = ./Lentille/package.dhall
+        , SearchAlias = ./SearchAlias/package.dhall
         , Tenant = ./Tenant/package.dhall
         , Ident = ./Ident/package.dhall
         , Config = { Type = ./Config.dhall, default = {=} }
