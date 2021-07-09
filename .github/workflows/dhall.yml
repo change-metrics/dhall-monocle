@@ -13,3 +13,4 @@ jobs:
       - run: dhall hash --file ./package.dhall
       - run: dhall-to-yaml --file ./example/config.dhall
       - run: dhall-to-yaml --file ./example/demo-node.dhall
+      - run: echo "(./package.dhall).Utils.getIndexNamesList ./example/demo-node.dhall" | dhall text

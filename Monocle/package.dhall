@@ -23,4 +23,5 @@ in      legacy
         , Tenant = ./Tenant/package.dhall
         , Ident = ./Ident/package.dhall
         , Config = { Type = ./Config.dhall, default = {=} }
+        , Utils = ./Utils.dhall
         }
