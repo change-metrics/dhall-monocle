@@ -4,9 +4,9 @@ in  Monocle.Config::{
     , tenants =
       [ Monocle.Tenant::{
         , index = "demo-index"
-        , crawlers_api_key = Some "super-secret"
-        , crawlers = Some
-          [ Monocle.Lentille::{
+        , crawlers_api_key = "super-secret"
+        , crawlers =
+          [ Monocle.Crawler::{
             , name = "my-gitlab"
             , update_since = "2021-01-01"
             , provider =

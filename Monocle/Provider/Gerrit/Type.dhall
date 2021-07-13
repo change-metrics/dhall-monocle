@@ -1,5 +1,5 @@
 { gerrit_url : Text
-, gerrit_http_password : Text
+, gerrit_url_insecure : Bool
+, prefix : Optional Text
 , repositories : Optional (List Text)
-, repositories_regex : Optional (List Text)
 }
