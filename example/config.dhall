@@ -12,8 +12,8 @@ in  Monocle.Config::{
             , provider =
                 Monocle.Provider.Gitlab
                   Monocle.Gitlab::{
-                  , gitlab_url = "https://gitlab.example.com"
-                  , gitlab_api_key = "gitlab-api-key"
+                  , gitlab_url = Some "https://gitlab.example.com"
+                  , gitlab_token = "gitlab-api-key"
                   , gitlab_repositories = Some
                     [ "my-org/project", "my-other-org/other-project" ]
                   }

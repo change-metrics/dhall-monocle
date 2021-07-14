@@ -46,24 +46,26 @@ let --| Belows are function to create the Monocle configuration
 let Prelude =
       https://prelude.dhall-lang.org/v17.0.0/package.dhall sha256:10db3c919c25e9046833df897a8ffe2701dc390fa0893d958c3430524be5a43e
 
-let baseGH =
-      Monocle.Github::{
-      , github_url = "https://github.com"
-      , github_token = env:SECRET as Text ? ""
-      , organization = ""
-      }
-
 let --| Create a github organization configuration
     mkGHRepo =
       \(info : { org : Text, repo : Text }) ->
-        baseGH // { organization = info.org, repositories = Some [ info.repo ] }
+        Monocle.Github::{
+        , github_token = env:SECRET as Text ? ""
+        , github_organization = info.org
+        , github_repositories = Some [ info.repo ]
+        }
 
-let mkGHOrg = \(organization : Text) -> baseGH // { organization }
+let mkGHOrg =
+      \(github_organization : Text) ->
+        Monocle.Github::{
+        , github_token = env:SECRET as Text ? ""
+        , github_organization
+        }
 
 let mkGHCrawler =
       \(provider : Monocle.Github.Type) ->
         Monocle.Crawler::{
-        , name = "gh-${provider.organization}"
+        , name = "gh-${provider.github_organization}"
         , update_since = default_since
         , provider = Monocle.Provider.Github provider
         }
@@ -94,7 +96,7 @@ let --| The ansible index configuration
                       Monocle.Provider.Gerrit
                         Monocle.Gerrit::{
                         , gerrit_url = "https://review.opendev.org"
-                        , repositories = Some
+                        , gerrit_repositories = Some
                           [ "^openstack/ansible-collections-openstack" ]
                         }
                   }

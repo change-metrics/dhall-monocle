@@ -1,5 +1,5 @@
-{ github_url : Text
+{ github_url : Optional Text
 , github_token : Text
-, organization : Text
-, repositories : Optional (List Text)
+, github_organization : Text
+, github_repositories : Optional (List Text)
 }
