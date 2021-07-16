@@ -4,16 +4,16 @@ in  Monocle.Config::{
     , tenants =
       [ Monocle.Tenant::{
         , index = "demo-index"
-        , crawlers_api_key = Some "super-secret"
-        , crawlers = Some
-          [ Monocle.Lentille::{
+        , crawlers_api_key = "super-secret"
+        , crawlers =
+          [ Monocle.Crawler::{
             , name = "my-gitlab"
             , update_since = "2021-01-01"
             , provider =
                 Monocle.Provider.Gitlab
                   Monocle.Gitlab::{
-                  , gitlab_url = "https://gitlab.example.com"
-                  , gitlab_api_key = "gitlab-api-key"
+                  , gitlab_url = Some "https://gitlab.example.com"
+                  , gitlab_token = "gitlab-api-key"
                   , gitlab_repositories = Some
                     [ "my-org/project", "my-other-org/other-project" ]
                   }

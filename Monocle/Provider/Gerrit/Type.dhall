@@ -1,5 +1,7 @@
 { gerrit_url : Text
-, gerrit_http_password : Text
-, repositories : Optional (List Text)
-, repositories_regex : Optional (List Text)
+, gerrit_login : Optional Text
+, gerrit_password : Optional Text
+, gerrit_url_insecure : Bool
+, gerrit_prefix : Optional Text
+, gerrit_repositories : Optional (List Text)
 }

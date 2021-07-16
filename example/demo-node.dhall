@@ -46,66 +46,73 @@ let --| Belows are function to create the Monocle configuration
 let Prelude =
       https://prelude.dhall-lang.org/v17.0.0/package.dhall sha256:10db3c919c25e9046833df897a8ffe2701dc390fa0893d958c3430524be5a43e
 
-let --| Create a github organization configuration for monocle with an optional repository
-    mkSimpleGHOrg =
-      \(repository : Optional Text) ->
-      \(name : Text) ->
-        let gh =
-              Monocle.GitHub::{
-              , name
-              , updated_since = default_since
-              , base_url = "https://github.com"
-              , token = Some (env:SECRET as Text ? "")
-              }
+let --| Create a github organization configuration
+    mkGHRepo =
+      \(info : { org : Text, repo : Text }) ->
+        Monocle.Github::{
+        , github_token = env:SECRET as Text ? ""
+        , github_organization = info.org
+        , github_repositories = Some [ info.repo ]
+        }
 
-        in  if    Prelude.Optional.null Text repository
-            then  gh
-            else  gh // { repository }
+let mkGHOrg =
+      \(github_organization : Text) ->
+        Monocle.Github::{
+        , github_token = env:SECRET as Text ? ""
+        , github_organization
+        }
+
+let mkGHCrawler =
+      \(provider : Monocle.Github.Type) ->
+        Monocle.Crawler::{
+        , name = "gh-${provider.github_organization}"
+        , update_since = default_since
+        , provider = Monocle.Provider.Github provider
+        }
 
 let --| The ansible index configuration
     ansible_index =
-      let repoToSimpleGHOrg =
-            \(repo : { org : Text, repo : Text }) ->
-              mkSimpleGHOrg (Some repo.repo) repo.org
+      let ghProviders =
+              Prelude.List.map Text Monocle.Github.Type mkGHOrg ansible.orgs
+            # Prelude.List.map
+                { org : Text, repo : Text }
+                Monocle.Github.Type
+                mkGHRepo
+                ansible.repos
 
-      in  Monocle.Index::{
+      in  Monocle.Tenant::{
           , index = "ansible"
-          , crawler = Some Monocle.Crawler::{
-            , loop_delay = 300
-            , github_orgs = Some
-                (   Prelude.List.map
-                      Text
-                      Monocle.GitHub.Type
-                      (mkSimpleGHOrg (None Text))
-                      ansible.orgs
-                  # Prelude.List.map
-                      { org : Text, repo : Text }
-                      Monocle.GitHub.Type
-                      repoToSimpleGHOrg
-                      ansible.repos
-                )
-            , gerrit_repositories = Some
-              [ Monocle.Gerrit::{
-                , name = "^openstack/ansible-collections-openstack"
-                , updated_since = default_since
-                , base_url = "https://review.opendev.org"
-                }
-              ]
-            }
+          , crawlers_api_key = env:CRAWLER_SECRET as Text ? ""
+          , crawlers =
+                Prelude.List.map
+                  Monocle.Github.Type
+                  Monocle.Crawler.Type
+                  mkGHCrawler
+                  ghProviders
+              # [ Monocle.Crawler::{
+                  , name = "opendev-gerrit"
+                  , update_since = default_since
+                  , provider =
+                      Monocle.Provider.Gerrit
+                        Monocle.Gerrit::{
+                        , gerrit_url = "https://review.opendev.org"
+                        , gerrit_repositories = Some
+                          [ "^openstack/ansible-collections-openstack" ]
+                        }
+                  }
+                ]
           }
 
 let --| Create a github crawler configuration for monocle
     mkSimpleGHIndex =
       \(name : Text) ->
-        Monocle.Index::{
+        Monocle.Tenant::{
         , index = name
-        , crawler = Some Monocle.Crawler::{
-          , loop_delay = 300
-          , github_orgs = Some [ mkSimpleGHOrg (None Text) name ]
-          }
+        , crawlers_api_key = env:CRAWLER_SECRET as Text ? ""
+        , crawlers = [ mkGHCrawler (mkGHOrg name) ]
         }
 
 let createSimpleGHIndexes =
-      Prelude.List.map Text Monocle.Index.Type mkSimpleGHIndex
+      Prelude.List.map Text Monocle.Tenant.Type mkSimpleGHIndex
 
 in  { tenants = createSimpleGHIndexes gh_orgs # [ ansible_index ] }
