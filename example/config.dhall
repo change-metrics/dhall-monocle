@@ -1,9 +1,9 @@
 let Monocle = ../package.dhall
 
 in  Monocle.Config::{
-    , tenants =
-      [ Monocle.Tenant::{
-        , index = "demo-index"
+    , workspaces =
+      [ Monocle.Workspace::{
+        , name = "demo-index"
         , crawlers_api_key = "super-secret"
         , crawlers =
           [ Monocle.Crawler::{

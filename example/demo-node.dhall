@@ -80,8 +80,8 @@ let --| The ansible index configuration
                 mkGHRepo
                 ansible.repos
 
-      in  Monocle.Tenant::{
-          , index = "ansible"
+      in  Monocle.Workspace::{
+          , name = "ansible"
           , crawlers_api_key = env:CRAWLER_SECRET as Text ? ""
           , crawlers =
                 Prelude.List.map
@@ -106,13 +106,13 @@ let --| The ansible index configuration
 let --| Create a github crawler configuration for monocle
     mkSimpleGHIndex =
       \(name : Text) ->
-        Monocle.Tenant::{
-        , index = name
+        Monocle.Workspace::{
+        , name
         , crawlers_api_key = env:CRAWLER_SECRET as Text ? ""
         , crawlers = [ mkGHCrawler (mkGHOrg name) ]
         }
 
 let createSimpleGHIndexes =
-      Prelude.List.map Text Monocle.Tenant.Type mkSimpleGHIndex
+      Prelude.List.map Text Monocle.Workspace.Type mkSimpleGHIndex
 
 in  { tenants = createSimpleGHIndexes gh_orgs # [ ansible_index ] }
