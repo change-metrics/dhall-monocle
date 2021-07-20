@@ -1,4 +1,4 @@
-{ gerrit_url_insecure = False
+{ gerrit_url_insecure = None Bool
 , gerrit_login = None Text
 , gerrit_password = None Text
 , gerrit_prefix = None Text
