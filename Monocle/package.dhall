@@ -6,7 +6,7 @@
 , Project = ./Project/package.dhall
 , Crawler = ./Crawler/package.dhall
 , SearchAlias = ./SearchAlias/package.dhall
-, Tenant = ./Tenant/package.dhall
+, Workspace = ./Workspace/package.dhall
 , Ident = ./Ident/package.dhall
 , Config = { Type = ./Config.dhall, default = {=} }
 , Utils = ./Utils.dhall

@@ -1,1 +1,1 @@
-{ tenants : List ./Tenant/Type.dhall }
+{ workspaces : List ./Workspace/Type.dhall }

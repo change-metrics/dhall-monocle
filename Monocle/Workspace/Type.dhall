@@ -1,4 +1,4 @@
-{ index : Text
+{ name : Text
 , crawlers_api_key : Text
 , crawlers : List ../Crawler/Type.dhall
 , projects : Optional (List ../Project/Type.dhall)
