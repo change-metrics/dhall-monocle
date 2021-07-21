@@ -4,15 +4,15 @@ let Prelude =
 let Monocle = { Workspace.Type = ./Workspace/Type.dhall }
 
 let getIndexNames =
-      \(config : { tenants : List Monocle.Workspace.Type }) ->
+      λ(config : { workspaces : List Monocle.Workspace.Type }) →
         Prelude.List.map
           Monocle.Workspace.Type
           Text
-          (\(index : Monocle.Workspace.Type) -> index.name)
-          config.tenants
+          (λ(index : Monocle.Workspace.Type) → index.name)
+          config.workspaces
 
 let getIndexNamesList =
-      \(config : { tenants : List Monocle.Workspace.Type }) ->
+      λ(config : { workspaces : List Monocle.Workspace.Type }) →
         Prelude.Text.concatSep "\n" (getIndexNames config)
 
 in  { getIndexNames, getIndexNamesList }

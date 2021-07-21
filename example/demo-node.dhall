@@ -115,4 +115,6 @@ let --| Create a github crawler configuration for monocle
 let createSimpleGHIndexes =
       Prelude.List.map Text Monocle.Workspace.Type mkSimpleGHIndex
 
-in  { tenants = createSimpleGHIndexes gh_orgs # [ ansible_index ] }
+in  Monocle.Config::{
+    , workspaces = createSimpleGHIndexes gh_orgs # [ ansible_index ]
+    }
