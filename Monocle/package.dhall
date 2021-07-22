@@ -1,4 +1,5 @@
 { Github = ./Provider/Github/package.dhall
+, GithubApplication = ./Provider/GithubApplication/package.dhall
 , Gerrit = ./Provider/Gerrit/package.dhall
 , Gitlab = ./Provider/Gitlab/package.dhall
 , Bugzilla = ./Provider/Bugzilla/package.dhall
