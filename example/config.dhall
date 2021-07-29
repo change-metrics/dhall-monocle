@@ -4,7 +4,6 @@ in  Monocle.Config::{
     , workspaces =
       [ Monocle.Workspace::{
         , name = "demo-index"
-        , crawlers_api_key = "super-secret"
         , crawlers =
           [ Monocle.Crawler::{
             , name = "my-gitlab"
@@ -12,10 +11,8 @@ in  Monocle.Config::{
             , provider =
                 Monocle.Provider.Gitlab
                   Monocle.Gitlab::{
-                  , gitlab_url = Some "https://gitlab.example.com"
-                  , gitlab_token = "gitlab-api-key"
-                  , gitlab_repositories = Some
-                    [ "my-org/project", "my-other-org/other-project" ]
+                  , gitlab_organization = "my-org"
+                  , gitlab_repositories = Some [ "project", "other/project" ]
                   }
             }
           , Monocle.Crawler::{

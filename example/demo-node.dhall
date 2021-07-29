@@ -50,17 +50,12 @@ let --| Create a github organization configuration
     mkGHRepo =
       \(info : { org : Text, repo : Text }) ->
         Monocle.Github::{
-        , github_token = env:SECRET as Text ? ""
         , github_organization = info.org
         , github_repositories = Some [ info.repo ]
         }
 
 let mkGHOrg =
-      \(github_organization : Text) ->
-        Monocle.Github::{
-        , github_token = env:SECRET as Text ? ""
-        , github_organization
-        }
+      \(github_organization : Text) -> Monocle.Github::{ github_organization }
 
 let mkGHCrawler =
       \(provider : Monocle.Github.Type) ->
@@ -82,7 +77,6 @@ let --| The ansible index configuration
 
       in  Monocle.Workspace::{
           , name = "ansible"
-          , crawlers_api_key = env:CRAWLER_SECRET as Text ? ""
           , crawlers =
                 Prelude.List.map
                   Monocle.Github.Type
@@ -106,11 +100,7 @@ let --| The ansible index configuration
 let --| Create a github crawler configuration for monocle
     mkSimpleGHIndex =
       \(name : Text) ->
-        Monocle.Workspace::{
-        , name
-        , crawlers_api_key = env:CRAWLER_SECRET as Text ? ""
-        , crawlers = [ mkGHCrawler (mkGHOrg name) ]
-        }
+        Monocle.Workspace::{ name, crawlers = [ mkGHCrawler (mkGHOrg name) ] }
 
 let createSimpleGHIndexes =
       Prelude.List.map Text Monocle.Workspace.Type mkSimpleGHIndex
