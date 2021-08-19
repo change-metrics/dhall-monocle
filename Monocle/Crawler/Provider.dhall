@@ -4,5 +4,6 @@
 | GithubApplicationProvider : ../Provider/GithubApplication/Type.dhall
 | GerritProvider : ../Provider/Gerrit/Type.dhall
 | BugzillaProvider : ../Provider/Bugzilla/Type.dhall
+| GithubIssuesProvider : ../Provider/GithubIssues/Type.dhall
 | TaskDataProvider
 >

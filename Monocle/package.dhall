@@ -3,6 +3,7 @@
 , Gerrit = ./Provider/Gerrit/package.dhall
 , Gitlab = ./Provider/Gitlab/package.dhall
 , Bugzilla = ./Provider/Bugzilla/package.dhall
+, GithubIssues = ./Provider/GithubIssues/package.dhall
 , Provider = ./Provider/package.dhall
 , Project = ./Project/package.dhall
 , Crawler = ./Crawler/package.dhall
