@@ -1,6 +1,14 @@
 let Monocle = ../package.dhall
 
 in  Monocle.Config::{
+    , about = Some Monocle.About::{
+      , links =
+        [ Monocle.Link::{
+          , display_text = "Link text"
+          , url = "https://github.com/change-metrics/monocle"
+          }
+        ]
+      }
     , workspaces =
       [ Monocle.Workspace::{
         , name = "demo-index"
