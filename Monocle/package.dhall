@@ -12,4 +12,5 @@
 , Config = ./Config/package.dhall
 , Utils = ./Utils.dhall
 , About = ./About/package.dhall
+, Link = ./Link/package.dhall
 }

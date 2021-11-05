@@ -1,1 +1,1 @@
-{ links = [] : List { name : Text, url : Text } }
+{ links = [] : List ../Link/Type.dhall }

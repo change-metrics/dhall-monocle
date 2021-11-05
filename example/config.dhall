@@ -3,7 +3,8 @@ let Monocle = ../package.dhall
 in  Monocle.Config::{
     , about = Some Monocle.About::{
       , links =
-        [ { name = "Link text"
+        [ Monocle.Link::{
+          , display_text = "Link text"
           , url = "https://github.com/change-metrics/monocle"
           }
         ]
