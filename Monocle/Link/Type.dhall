@@ -1,1 +1,1 @@
-{ display_text : Text, url : Text }
+{ name : Text, url : Text }
