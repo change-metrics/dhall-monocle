@@ -9,6 +9,8 @@
 , SearchAlias = ./SearchAlias/package.dhall
 , Workspace = ./Workspace/package.dhall
 , Ident = ./Ident/package.dhall
-, Config = { Type = ./Config.dhall, default = {=} }
+, Config = ./Config/package.dhall
 , Utils = ./Utils.dhall
+, About = ./About/package.dhall
+, Link = ./Link/package.dhall
 }
