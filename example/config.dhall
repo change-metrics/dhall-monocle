@@ -6,6 +6,7 @@ in  Monocle.Config::{
         [ Monocle.Link::{
           , name = "Link text"
           , url = "https://github.com/change-metrics/monocle"
+          , category = Some "Community"
           }
         ]
       }

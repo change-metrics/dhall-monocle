@@ -1,1 +1,1 @@
-{ Type = ./Type.dhall, default = {=} }
+{ Type = ./Type.dhall, default = ./default.dhall }

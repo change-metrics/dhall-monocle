@@ -1,1 +1,1 @@
-{ name : Text, url : Text }
+{ name : Text, url : Text, category : Optional Text }
