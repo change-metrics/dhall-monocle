@@ -1,0 +1,1 @@
+{ provider : ../OIDCProvider/Type.dhall }
