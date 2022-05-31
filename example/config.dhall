@@ -10,6 +10,13 @@ in  Monocle.Config::{
           }
         ]
       }
+    , auth = Some Monocle.Auth::{
+      , provider = Monocle.OIDCProvider::{
+        , issuer = "accounts.google.com"
+        , client_id = "12345"
+        , user_claim = "preferred_username"
+        }
+      }
     , workspaces =
       [ Monocle.Workspace::{
         , name = "demo-index"
