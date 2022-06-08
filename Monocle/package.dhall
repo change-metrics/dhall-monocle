@@ -13,6 +13,4 @@
 , Utils = ./Utils.dhall
 , About = ./About/package.dhall
 , Link = ./Link/package.dhall
-, Auth = ./Auth/package.dhall
-, OIDCProvider = ./OIDCProvider/package.dhall
 }
