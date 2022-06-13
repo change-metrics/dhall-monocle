@@ -1,4 +1,4 @@
 { enforce_auth : Optional Bool
-, provider : ./Provider.dhall
-, extra_providers : Optional (List ./Provider.dhall)
+, auth_provider : ./Provider.dhall
+, extra_auth_providers : Optional (List ./Provider.dhall)
 }

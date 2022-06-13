@@ -1,6 +1,7 @@
 { Auth = ./Auth/package.dhall
 , AuthProvider = ./AuthProvider/package.dhall
 , OIDC = ./AuthProvider/OIDC/package.dhall
+, GithubAuth = ./AuthProvider/GithubAuth/package.dhall
 , Github = ./Provider/Github/package.dhall
 , GithubApplication = ./Provider/GithubApplication/package.dhall
 , Gerrit = ./Provider/Gerrit/package.dhall

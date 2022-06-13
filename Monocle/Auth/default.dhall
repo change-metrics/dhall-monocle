@@ -1,3 +1,3 @@
 { enforce_auth = Some False
-, extra_providers = Some ([] : List ./Provider.dhall)
+, extra_auth_providers = Some ([] : List ./Provider.dhall)
 }
